@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/medigan-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/medigan-{{ version }}.tar.gz
   sha256: a53b358234c7d635ce92988023f641d3652ebab40862edbb49fa2477e85b51fd
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - matplotlib-base
     - numpy
     - pygithub
-    - python >=3.6
+    - python >={{ python_min }}
     - requests
     - pytorch
     - tqdm
@@ -34,6 +34,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/RichardObi/medigan
